@@ -1,0 +1,456 @@
+
+
+$ npm init
+
+# dependancies
+$ npm install express nodemon body-parser router mongoose cors dotenv
+
+# cars (route security) concurrently (run servers)
+$ npm install express nodemon mongoose dotenv concurrently cors
+
+# sever restart module
+$ npm i nodemon 
+$ npm install -g --force nodemon
+$ nodemon server.js 
+ 
+# express is a web app framework 
+# clean json 
+$ npm i body-parser 
+
+# cookies
+$ npm install cookie-parser body-parser
+
+# database
+# start mongodb
+$ brew services start mongodb/brew/mongodb-community
+
+# create  mongo db 
+$ mongo
+
+# create school db
+$ use school
+
+# show databases
+$ show databases
+
+# create CCollection 
+$ db.createCollection('collectionname')
+$ db.createCollection('sectionA')
+
+# add doc to collections
+# db.collectionname
+$ db.sectionA.insert({name: 'jack', age : 33})
+$ db.sectionA.insert({name: 'quan', age : 35})
+$ db.sectionA.insert({name: 'Chris', age : 25})
+
+
+# find collections
+# db.collectionname.find()
+$ db.sectionA.find()
+$
+
+# update
+$ db.collectionname.update({name},{$set: { change value}})
+$ db.sectionA.update({name: 'jack'}, {$set:{age : 133}})
+$ db.sectionA.update({name: 'jack'},{$set: { name : 'king'}})
+
+
+# remove
+$ db.collectionname.remove({name})
+$ db.sectionA.remove({name: 'king'})
+
+
+# QUERY
+$ async function getCourse(){
+	const courses = await Course
+	.find({ author: 'tom', isGood: true})
+	.find() // used with and or or only
+	.or([{author: 'tom'},{author: 'Kim'}]
+	.limit(10)
+.sort({name: 1})
+.select({name: 1, tags: 1}) // what u want in results
+} 
+getCourse()
+
+
+
+# QUERY
+
+# password 
+$ npm i joy-complexity
+
+# npm i bcrypt
+$ const bcrypt = require('bcrypt'); 
+$ const salt = await bcrypt.genSalt(10);
+$ user.password = await bcrypt.hash(user.password, salt); 
+
+
+# jwt
+$ npm i jsonwebtoken@8.1.1
+
+# config
+$ npm i config@1.29.4
+
+# error
+$ npm i express-async-errors
+
+
+
+## Authentication
+// HTTPCOOKIES
+// USER STEPS 
+// MODEL
+// CONTROLLER 
+// C > REGISTER THE USER
+// ROUTER
+// APP
+// add bcrypt in model
+// add Return JWT token in model
+// take Return JWT token to controller
+// store token to http
+// use middlewares
+
+Ghulamabbass2
+
+## REDUX
+// CONSTANTS
+// USEREDUCER
+// ACTIONS
+
+
+
+
+
+
+
+
+
+
+
+
+# REACT APP CLIENT
+
+#
+# $ npm install -g create-react-app
+$ npx create-react-app client
+$ cd client
+$ npm start
+
+# CONNECT BOTH
+# in package json add backend route
+$ "proxy" : "http://localhost:3001/"
+
+# dependancies
+$ npm i moment axios react-router-dom
+$ npm i react-date-picker bootstrap
+$ npm install react-bootstrap bootstrap --save
+
+# app js
+$ import "bootstrap/dist/css/bootstrap.css";
+
+$ npm i react-router-dom 
+$ npm i bootstrap 
+$ npm i axios 
+$  npm i react-date-picker 
+$ npm i moment
+
+# font awesome
+$ npm install --save react-fontawesome 
+$ # sudo npm install react-icons --save
+$ import { FaAirbnb } from "react-icons/fa";
+$ <FaAirbnb size={44} color="green" />
+
+# time date
+$ npm install moment --save
+$ import Moment from 'moment';
+
+# title 
+$ npm i react-helmet
+$ npm i react-alert react-alert-template-basic 
+$ npm i react-bootstrap react-helmet react-js-pagination
+$ npm i axios @stripe/react-stripe-js @stripe/stripe-js
+
+#
+  dateDMY: Moment("1994-07-01").format('DD-MM-YYYY'),
+      dateMDY: Moment("1994-07-01").format('MM-DD-YYYY'),
+      dateYMD: Moment("01-07-1994").format('YYYY-MM-DD')
+  <p> DMY Format: { this.state.dateDMY } </p>
+        <p> MDY Format: { this.state.dateMDY } </p>
+        <p> YMD Format: { this.state.dateYMD } </p>
+
+# render redirect
+$ window.location = '/';
+
+
+# # xxxxxxx  xxxxxxxxxxxxxx  xxxxxxxxxxxxxx  xxxxxxxxxxxxxx  xxxxxxxxxxxxxx  xxxxxxx
+# # xxxxxxx REDUX
+ 
+
+// CREATE A STORE 
+// imports
+
+# CREATE STORE.JS
+// basic code
+
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension'
+
+
+// reducers
+const reducer = combineReducers({ })
+
+// initial state
+let initialState = {}
+
+// middleware
+const middlware = [thunk];
+const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middlware)))
+
+export default store;
+
+# go to index js
+$ import { Provider } from 'react-redux'
+$ import store from './store'
+
+# wrapp app with
+ <Provider store={store} > 
+    <App />
+  </Provider>
+
+### check redux devtools
+
+## CREATE CONSTANT JS
+export default ALL_PRODUCTS_REQUEST = 'ALL_PRODUCTS_REQUEST'
+export default ALL_PRODUCTS_SUCCESS = 'ALL_PRODUCTS_SUCCESS'
+export default ALL_PRODUCTS_FAIL = 'ALL_PRODUCTS_FAIL'
+export default CLEAR_ERRORS = 'CLEAR_ERRORS'
+
+## CREATE REDUCER
+// import constants
+// takes in state & action. 
+// initial state is product array,
+export const productsReducer = (state = { products: [] }, action => {
+    switch (action.type) {
+        case ALL_PRODUCTS_REQUEST:
+            return {
+                loading: true,
+                products: []
+            } 
+        case ALL_PRODUCTS_SUCCESS:
+            return {
+                loading: false,
+                products: action.payload.products,
+                productsCount: action.payload.productsCount
+            } 
+        case ALL_PRODUCTS_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            } 
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            } 
+        default:
+            return state;
+    }
+
+})
+
+
+// ADD THIS REDUCES TO STORE JS
+$ import { productReducers } from './reducers/productsReducers'
+
+// ADD productReducers TO STORE reducer function
+$ const reducer = combineReducers({ 
+    products: productReducers
+})
+
+
+####  ACTIONS
+// create actions js
+import axios from 'axios';
+
+import {
+    ALL_PRODUCTS_REQUEST,
+    ALL_PRODUCTS_SUCCESS,
+    ALL_PRODUCTS_FAIL,
+    CLEAR_ERRORS
+
+} from '../constants/productConstants'
+
+export const  getProducts = () => async (dispatch) => {
+    try {
+        dispatch({type: ALL_PRODUCTS_REQUEST})
+        const { data } = await axios.get('/api/v1/products')
+
+        dispatch({
+            type: ALL_PRODUCTS_SUCCESS,
+            payload: data
+        })
+
+    } catch (error) {
+        dispatch({
+            type: ALL_PRODUCTS_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+
+// Clear Errors
+export const clearErrors = () => async (dispatch) => {
+    dispatch({
+        type: CLEAR_ERRORS
+    })
+}
+
+
+### GO TO HOME JS
+# import dispatch
+# and actions
+$ import { useDispatch, useSelector } from 'react-redux'
+$ import { getProducts } from '../actions/productActions'
+
+# in function
+$ const dispatch = useDispatch();
+
+# use effect
+
+
+
+
+///////////
+> Constants
+> reducer 
+> store
+> action
+> component
+
+$
+
+$
+$
+$
+$
+$
+$
+$
+$
+
+
+
+# xxxxxxx
+
+
+
+
+# AUTO RUNN
+# ADD LINES IN PACKAGE JSON ON SCRIPTS
+$   "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+# ON CLI RUN
+$ npm run server
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # backend node
+
+
+# install
+$ brew tap mongodb/brew
+$ brew install mongodb-community@4.4
+
+# run
+$ brew services start mongodb-community@4.4
+
+
+#
+$ npm init
+# main
+$ server.js
+
+# dependancies
+$ npm i express dotenv mongoose
+
+#
+$ node backend/server.js
+
+#
+$ npm i nodemon --save-dev
+
+#
+$ npm run dev
+$ npm run prod
+
+
+# start nom from cli
+# https://code.tutsplus.com/tutorials/code-your-first-api-with-nodejs-and-express-set-up-the-server--cms-31698
+$ mkdir express-api && cd express-api 
+$ npm init
+$ npm install body-parser express mysql request
+
+# Setting Up an HTTP Server
+$ ..
+# start server
+$ node hello-server.js
+
+# Setting Up an Express Server
+$ 
+
+
+
+# VALIDATION
+$ npm i joi@13.1.0
+$ const Joe = require('joi')
+
+
+
+#
+
+
+
+
+
+
+
+
+
+#
+
+ 
+
+
+# create id 
+$ npm i uuid
+$ import {v4 as uuid } from 'uuid';
+$ id: uuid();
+
+
+
+
+
+
+
